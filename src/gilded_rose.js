@@ -12,6 +12,14 @@ class Shop {
   }
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
+      const item = this.items[i]
+      if (item.name === 'normal') {
+        this.normalUpdateQuality(item);
+        return this.items;
+      }
+
+
+
       if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (this.items[i].quality > 0) {
           if (this.items[i].name != 'Sulfuras, Hand of Ragnaros') {
@@ -58,5 +66,12 @@ class Shop {
     }
 
     return this.items;
+  }
+
+  normalUpdateQuality(item) {
+    item.sellIn -= 1
+    if (item.quality <= 0) { return }
+    item.quality -= 1
+    if (item.sellIn < 0) { item.quality -= 1 }
   }
 }
