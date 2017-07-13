@@ -17,6 +17,11 @@ class Shop {
         this.normalUpdateQuality(item);
         return this.items;
       }
+      if (item.name === 'Aged Brie') {
+        this.brieUpdateQuality(item);
+        return this.items;
+      }
+
 
 
 
@@ -73,5 +78,12 @@ class Shop {
     if (item.quality <= 0) { return }
     item.quality -= 1
     if (item.sellIn < 0) { item.quality -= 1 }
+  }
+
+  brieUpdateQuality(item) {
+    item.sellIn -= 1
+    if (item.quality >= 50) { return }
+    item.quality += 1
+    if (item.sellIn < 0) { item.quality += 1 }
   }
 }
