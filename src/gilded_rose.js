@@ -21,6 +21,10 @@ class Shop {
         this.brieUpdateQuality(item);
         return this.items;
       }
+      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+        this.backstageUpdateQuality(item);
+        return this.items;
+      }
 
 
 
@@ -85,5 +89,14 @@ class Shop {
     if (item.quality >= 50) { return }
     item.quality += 1
     if (item.sellIn < 0) { item.quality += 1 }
+  }
+
+  backstageUpdateQuality(item) {
+    item.sellIn -= 1
+    if (item.quality >= 50) { return }
+    if (item.sellIn < 0) { return item.quality = 0 }
+    item.quality += 1
+    if (item.sellIn < 10) { item.quality += 1 }
+    if (item.sellIn < 5) { item.quality += 1 }
   }
 }
