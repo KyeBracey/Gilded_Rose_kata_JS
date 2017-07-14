@@ -24,6 +24,17 @@ class Brie extends Item {
   }
 }
 
+class Backstage extends Item {
+  updateQuality() {
+    this.sellIn -= 1
+    if (this.sellIn < 0) { return this.quality = 0 }
+    if (this.quality >= 50) { return }
+    this.quality += 1
+    if (this.sellIn < 10) { this.quality += 1 }
+    if (this.sellIn < 5) { this.quality += 1 }
+  }
+}
+
 class Shop {
   constructor(items=[]){
     this.items = items.map(function (item) {
@@ -49,23 +60,11 @@ class Shop {
       var item = this.items[i]
       item.updateQuality();
 
-      if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        this.backstageUpdateQuality(item);
-      }
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
         this.sulfurasUpdateQuality(item);
       }
     return this.items;
     }
-  }
-
-  backstageUpdateQuality(item) {
-    item.sellIn -= 1
-    if (item.quality >= 50) { return }
-    if (item.sellIn < 0) { return item.quality = 0 }
-    item.quality += 1
-    if (item.sellIn < 10) { item.quality += 1 }
-    if (item.sellIn < 5) { item.quality += 1 }
   }
 
   sulfurasUpdateQuality(item) {
