@@ -2,6 +2,18 @@
 
 ## Makers Academy week 10 tech test #2
 
+This kata was originally created by Terry Hughes.  The goal is to refactor the nested `if` statement, and then implement the functionality to deal with the "Conjured" item type (see Requirements below).
+
+## Approach
+
+My first step was to write a "Golden Master" test suite.  This involved determining every input type the program currently accepted, and writing test cases for every possible resulting output.  I wrote tests for Conjured items as well, but pended these until I was finished with refactoring.
+
+Once the test suite was ready, I tackled the input types and solved one `describe` block at a time.  I wrote separate methods to override each input as I went along, while keeping the nested if statement in place, then deleted this once I was satisfied I had covered every possibility, and made sure the test suite still passed.
+
+Once I had a collection of small methods, I extracted these to small objects (subclasses of the Item class, each with their own updateQuality method).
+
+After these refactoring steps I was ready to implement conjured - because of the structure of the other item classes I had created, implementing conjured was incredibly easy :)
+
 ## Requirements
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a prime location in a
