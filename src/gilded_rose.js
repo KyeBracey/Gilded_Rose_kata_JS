@@ -15,6 +15,15 @@ class Normal extends Item {
   }
 }
 
+class Brie extends Item {
+  updateQuality() {
+    this.sellIn -= 1
+    if (this.quality >= 50) { return }
+    this.quality += 1
+    if (this.sellIn < 0) { this.quality += 1 }
+  }
+}
+
 class Shop {
   constructor(items=[]){
     this.items = items.map(function (item) {
@@ -40,9 +49,6 @@ class Shop {
       var item = this.items[i]
       item.updateQuality();
 
-      if (item.name === 'Aged Brie') {
-        this.brieUpdateQuality(item);
-      }
       if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
         this.backstageUpdateQuality(item);
       }
@@ -51,13 +57,6 @@ class Shop {
       }
     return this.items;
     }
-  }
-
-  brieUpdateQuality(item) {
-    item.sellIn -= 1
-    if (item.quality >= 50) { return }
-    item.quality += 1
-    if (item.sellIn < 0) { item.quality += 1 }
   }
 
   backstageUpdateQuality(item) {
