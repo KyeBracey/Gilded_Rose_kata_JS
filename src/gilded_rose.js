@@ -6,16 +6,40 @@ class Item {
   }
 }
 
+class Normal extends Item {
+  updateQuality() {
+    this.sellIn -= 1
+    if (this.quality <= 0) { return }
+    this.quality -= 1
+    if (this.sellIn < 0) { this.quality -= 1 }
+  }
+}
+
 class Shop {
   constructor(items=[]){
-    this.items = items;
+    this.items = items.map(function (item) {
+      return new (this.classFor(item))(item.name, item.sellIn, item.quality)
+    }.bind(this));
   }
+
+  classFor(item) {
+    switch (item.name) {
+      case 'normal':
+        return Normal
+      case 'Aged Brie':
+        return Brie
+      case 'Backstage passes to a TAFKAL80ETC concert':
+        return Backstage
+      case 'Sulfuras, Hand of Ragnaros':
+        return Sulfuras
+    }
+  }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
-      const item = this.items[i]
-      if (item.name === 'normal') {
-        this.normalUpdateQuality(item);
-      }
+      var item = this.items[i]
+      item.updateQuality();
+
       if (item.name === 'Aged Brie') {
         this.brieUpdateQuality(item);
       }
@@ -27,13 +51,6 @@ class Shop {
       }
     return this.items;
     }
-  }
-
-  normalUpdateQuality(item) {
-    item.sellIn -= 1
-    if (item.quality <= 0) { return }
-    item.quality -= 1
-    if (item.sellIn < 0) { item.quality -= 1 }
   }
 
   brieUpdateQuality(item) {
