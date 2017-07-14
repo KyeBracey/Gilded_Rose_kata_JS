@@ -35,6 +35,12 @@ class Backstage extends Item {
   }
 }
 
+class Sulfuras extends Item {
+  updateQuality() {
+
+  }
+}
+
 class Shop {
   constructor(items=[]){
     this.items = items.map(function (item) {
@@ -59,15 +65,7 @@ class Shop {
     for (var i = 0; i < this.items.length; i++) {
       var item = this.items[i]
       item.updateQuality();
-
-      if (item.name === 'Sulfuras, Hand of Ragnaros') {
-        this.sulfurasUpdateQuality(item);
-      }
-    return this.items;
     }
-  }
-
-  sulfurasUpdateQuality(item) {
-
+    return this.items;
   }
 }
