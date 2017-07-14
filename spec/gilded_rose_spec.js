@@ -91,16 +91,16 @@ describe('Gilded Rose', () => {
     });
   });
 
-  xdescribe('Conjured', () => {
+  describe('Conjured', () => {
     it('Quality decreases by 2 if sellIn has not expired', () => {
-      const gildedRose = new Shop([ new Item('Conjured apron', 1, 10) ]);
+      const gildedRose = new Shop([ new Item('conjured', 1, 10) ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toEqual(0);
       expect(items[0].quality).toEqual(8);
     });
 
     it('Quality decreases by 4 if sellIn has expired', () => {
-      const gildedRose = new Shop([ new Item('Conjured apron', 0, 10) ]);
+      const gildedRose = new Shop([ new Item('conjured', 0, 10) ]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toEqual(-1);
       expect(items[0].quality).toEqual(6);

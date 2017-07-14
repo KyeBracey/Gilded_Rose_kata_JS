@@ -41,6 +41,15 @@ class Sulfuras extends Item {
   }
 }
 
+class Conjured extends Item {
+  updateQuality() {
+    this.sellIn -= 1
+    if (this.quality <= 0) { return }
+    this.quality -= 2
+    if (this.sellIn < 0) { this.quality -= 2 }
+  }
+}
+
 class Shop {
   constructor(items=[]){
     this.items = items.map(function (item) {
@@ -58,6 +67,8 @@ class Shop {
         return Backstage
       case 'Sulfuras, Hand of Ragnaros':
         return Sulfuras
+      case 'conjured':
+        return Conjured
     }
   }
 
